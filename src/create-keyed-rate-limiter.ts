@@ -1,11 +1,6 @@
 /**
  * @system rate-limit
  * @status handwritten
- * @edit edit directly
- *
- * Per-key sliding-window rate limiter. Each key (e.g., IP address, user ID)
- * gets its own independent sliding window. Auto-registers into the global
- * registry. Stale keys are pruned automatically.
  */
 
 import { rateLimitRegistry } from "./registry.ts";

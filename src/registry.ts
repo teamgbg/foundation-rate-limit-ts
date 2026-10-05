@@ -1,9 +1,6 @@
 /**
  * @system rate-limit
  * @status handwritten
- * @edit edit directly
- *
- * Process-global registry of all rate limiters for observability and control.
  */
 
 import type {

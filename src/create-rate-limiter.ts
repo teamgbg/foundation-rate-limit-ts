@@ -1,25 +1,7 @@
 /**
  * @system rate-limit
  * @status handwritten
- * @edit edit directly
- *
- * Sliding-window rate limiter with auto-registration into the global registry.
  */
-
-		/**
-		 * WAIT for a slot instead of refusing. This is the OUTBOUND half of the
-		 * capability, and its absence is why no adapter used this primitive.
-		 *
-		 * `tryAcquire` answers "may I?" with a boolean, which is right for INBOUND
-		 * traffic — a caller over its limit gets a 429 and that IS the correct
-		 * outcome. Outbound is the opposite: we are the caller, being refused is
-		 * never the desired outcome, and the only useful response is to slow down.
-		 * With no waiting form, every integration reached for after-the-fact retry
-		 * instead, which cannot prevent a 429 — it can only react to one.
-		 *
-		 * Sleeps until the oldest event in the window expires, so throughput
-		 * converges on the declared ceiling rather than bursting into it.
-		 */
 
 import { rateLimitRegistry } from "./registry.ts";
 import type { RateLimiter, RateLimitOptions } from "./types.ts";

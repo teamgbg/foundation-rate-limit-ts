@@ -1,9 +1,6 @@
 /**
  * @system rate-limit
  * @status handwritten
- * @edit edit directly
- *
- * Configured-primitive entry point for the rate-limit package.
  */
 
 import { rateLimitRegistry } from "./registry.ts";

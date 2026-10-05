@@ -1,9 +1,6 @@
 /**
  * @system rate-limit
  * @status handwritten
- * @edit edit directly
- *
- * Type definitions for the rate-limit primitive.
  */
 
 export interface RateLimitOptions {
@@ -14,12 +11,7 @@ export interface RateLimitOptions {
 export interface RateLimiter {
 	/** Non-blocking: "may I?" — the INBOUND form, where refusing is the right answer. */
 	tryAcquire(): boolean;
-	/**
-	 * Blocking: waits for a slot — the OUTBOUND form, where we are the caller and
-	 * the only useful response to being at the ceiling is to slow down. Without
-	 * this, integrations reach for after-the-fact retry, which reacts to a 429
-	 * instead of preventing it.
-	 */
+	/** Blocking: waits for a slot until the oldest event in the window expires, so throughput converges on the declared ceiling rather than bursting into it — the OUTBOUND form, where we are the caller, so the only useful response to the ceiling is to slow down. Without it, integrations reach for after-the-fact retry, which reacts to a 429 instead of preventing one. */
 	acquire(signal?: AbortSignal): Promise<void>;
 	readonly remaining: number;
 	readonly isExhausted: boolean;
